@@ -20,6 +20,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { app } from '../firebase';
 import { Link } from 'react-router-dom'
+import { RiDeleteBin6Line, RiEdit2Line } from "react-icons/ri"
 
 function Profile() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -140,6 +141,25 @@ function Profile() {
     }
   };
 
+  const handleListingDelete = async (listingId) => {
+    try {
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
@@ -242,9 +262,10 @@ function Profile() {
                 <p>{listing.name}</p>
               </Link>
 
-              <div className='flex flex-col item-center'>
-                <button className='text-red-700 uppercase'>Delete</button>
-                <button className='text-green-700 uppercase'>Edit</button>
+              <div className='flex flex-col item-center gap-3' >
+                <button
+                  onClick={() => handleListingDelete(listing._id)} title="Delete Listing" className='text-red-700 hover:opacity-75'>< RiDeleteBin6Line size={20} /></button>
+                <button title="Edit Listing" className='text-green-700 hover:opacity-75'><RiEdit2Line size={20} /></button>
               </div>
             </div>
           ))}
