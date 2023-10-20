@@ -265,7 +265,10 @@ function Profile() {
               <div className='flex flex-col item-center gap-3' >
                 <button
                   onClick={() => handleListingDelete(listing._id)} title="Delete Listing" className='text-red-700 hover:opacity-75'>< RiDeleteBin6Line size={20} /></button>
-                <button title="Edit Listing" className='text-green-700 hover:opacity-75'><RiEdit2Line size={20} /></button>
+                  
+                <Link to={`/update-listing/${listing._id}`}>
+                  <button title="Edit Listing" className='text-green-700 hover:opacity-75'><RiEdit2Line size={20} /></button>
+                </Link>
               </div>
             </div>
           ))}
