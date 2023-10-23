@@ -66,7 +66,3 @@ npm run dev
 - `npm run dev`: Start the Vite development server.
 - `npm run build`: Build the client for production.
 - `npm run lint`: Lint the project using ESLint.
-
-## License
-
-This project is licensed under the ISC License. Feel free to use, modify, and distribute it as needed.
